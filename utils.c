@@ -6,19 +6,30 @@
 /*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 21:29:18 by tnessrou          #+#    #+#             */
-/*   Updated: 2021/10/19 19:08:45 by tnessrou         ###   ########.fr       */
+/*   Updated: 2021/10/21 19:04:20 by tnessrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 struct timeval	g_time;
+int				g_isend = 0;
 
 int	ft_isdigit(int c)
 {
 	if ((c < 58) && (c > 47))
 		return (1);
 	return (0);
+}
+
+int	my_cmp(char *s1, char *s2)
+{
+	while (*s1 == *s2 && *s1 && *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 == *s2);
 }
 
 unsigned long	get_time(void)
@@ -30,8 +41,13 @@ unsigned long	get_time(void)
 void	output(t_philo *philo, t_status *status, char *str)
 {
 	pthread_mutex_lock(&status->output);
-	printf("Time: %lu\n", get_time() - status->time_begin);
-	printf("%u %s\n", philo->pos, str);
+	if (!g_isend)
+	{
+		printf("Time: %lu\t", get_time() - status->time_begin);
+		printf("%u %s\n", philo->pos, str);
+		if (my_cmp(str, DEATH))
+			g_isend = 1;
+	}
 	pthread_mutex_unlock(&status->output);
 }
 

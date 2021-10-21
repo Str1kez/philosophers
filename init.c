@@ -21,7 +21,7 @@ int	init_link(t_link **link, t_status *status)
 
 static int	init_forks(t_status *status)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	status->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
@@ -35,7 +35,7 @@ static int	init_forks(t_status *status)
 
 static int	init_philos(t_status *status)
 {
-	int	i;
+	unsigned int	i;
 
 	status->philos = (t_philo *)malloc(sizeof(t_philo) * status->phil_count);
 	if (!status->philos)
@@ -66,6 +66,9 @@ int	init_status(t_status *status, int argc, char **argv)
 		status->eat_count = ft_atoi(argv[5]);
 	else
 		status->eat_count = 0;
+	status->time_begin = 0;
+	status->philos = NULL;
+	status->forks = NULL;
 	if (status->phil_count < 2 || status->time_to_die < 50
 		 || status->time_to_eat < 50 || status->time_to_sleep < 50
 		 || status->eat_count < 0)

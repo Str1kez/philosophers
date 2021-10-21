@@ -6,7 +6,7 @@
 /*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 21:02:21 by tnessrou          #+#    #+#             */
-/*   Updated: 2021/10/19 19:08:51 by tnessrou         ###   ########.fr       */
+/*   Updated: 2021/10/21 14:43:01 by tnessrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <stdio.h>
+# include <unistd.h>
 # include <sys/time.h>
 
 typedef struct s_philo
