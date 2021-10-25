@@ -6,7 +6,7 @@
 /*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:27:50 by tnessrou          #+#    #+#             */
-/*   Updated: 2021/10/21 19:09:15 by tnessrou         ###   ########.fr       */
+/*   Updated: 2021/10/25 20:09:49 by tnessrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,26 @@ static void	*death_check(void *link_v)
 		// ? Почему от этого зависит длительность жизни???
 		usleep(1000);
 	}
+}
+
+static void	*eat_count_check(void *link_v)
+{
+	t_link			*link;
+	unsigned int	eat_sum;
+	unsigned int	phil;
+
+	link = (t_link *)link_v;
+	eat_sum = 0;
+	while (eat_sum < link->status->eat_count)
+	{
+		phil = 0;
+		while (phil < link->status->phil_count)
+			pthread_mutex_lock(&(link[phil++].philo->eat));
+		eat_sum++;
+	}
+	output(link->philo, link->status, NOT_EAT);
+	pthread_mutex_unlock(&link->status->is_dead);
+	return (NULL);
 }
 
 static void	*coroutine(void *link_v)
@@ -66,6 +86,12 @@ int	threads(t_status *status, t_link *link)
 	if (init_link(&link, status))
 		return (1);
 	status->time_begin = get_time();
+	if (status->eat_count > 0)
+	{
+		if (pthread_create(&thread, NULL, eat_count_check, (void *)link))
+			return (1);
+		pthread_detach(thread);
+	}
 	while (i < status->phil_count)
 	{
 		if (pthread_create(&thread, NULL, coroutine, (void *)(link + i)))

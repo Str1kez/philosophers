@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/25 20:15:46 by tnessrou          #+#    #+#             */
+/*   Updated: 2021/10/25 20:15:48 by tnessrou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	main(int argc, char **argv)
@@ -12,10 +24,8 @@ int	main(int argc, char **argv)
 		return (clear_all(&status, link));
 	if (threads(&status, link))
 		return (clear_all(&status, link));
-	// printf("lets fun\n");
 	pthread_mutex_lock(&status.is_dead);
-	// printf("unlock is_dead in main\n");
-	// pthread_mutex_unlock(&status.is_dead);
+	pthread_mutex_unlock(&status.is_dead);
 	clear_all(&status, link);
 	return (0);
 }

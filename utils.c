@@ -6,7 +6,7 @@
 /*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 21:29:18 by tnessrou          #+#    #+#             */
-/*   Updated: 2021/10/21 19:04:20 by tnessrou         ###   ########.fr       */
+/*   Updated: 2021/10/25 19:58:04 by tnessrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	output(t_philo *philo, t_status *status, char *str)
 	{
 		printf("Time: %lu\t", get_time() - status->time_begin);
 		printf("%u %s\n", philo->pos, str);
-		if (my_cmp(str, DEATH))
+		if (my_cmp(str, DEATH) || my_cmp(str, NOT_EAT))
 			g_isend = 1;
 	}
 	pthread_mutex_unlock(&status->output);
