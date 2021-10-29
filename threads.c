@@ -35,9 +35,9 @@ static void	*death_check(void *link_v)
 
 static void	*eat_count_check(void *link_v)
 {
-	t_link			*link;
-	unsigned int	eat_sum;
-	unsigned int	phil;
+	t_link	*link;
+	int		eat_sum;
+	int		phil;
 
 	link = (t_link *)link_v;
 	eat_sum = 0;
@@ -79,8 +79,8 @@ static void	*coroutine(void *link_v)
 
 int	threads(t_status *status, t_link *link)
 {
-	unsigned int	i;
-	pthread_t		thread;
+	int			i;
+	pthread_t	thread;
 
 	i = 0;
 	if (init_link(&link, status))
@@ -97,7 +97,6 @@ int	threads(t_status *status, t_link *link)
 		if (pthread_create(&thread, NULL, coroutine, (void *)(link + i)))
 			return (1);
 		pthread_detach(thread);
-		// usleep(100);
 		i++;
 	}
 	return (0);

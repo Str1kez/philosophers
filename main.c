@@ -18,6 +18,8 @@ int	main(int argc, char **argv)
 	t_link		*link;
 
 	link = NULL;
+	status.philos = NULL;
+	status.forks = NULL;
 	if (argc != 5 && argc != 6)
 		return (clear_all(&status, link));
 	if (init_status(&status, argc, argv))

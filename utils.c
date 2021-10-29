@@ -53,7 +53,7 @@ void	output(t_philo *philo, t_status *status, char *str)
 
 int	clear_all(t_status *status, t_link *link)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	if (status->philos)

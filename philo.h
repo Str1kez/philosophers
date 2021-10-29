@@ -27,24 +27,24 @@
 
 typedef struct s_philo
 {
-	unsigned int	pos;
+	int				pos;
 	int				is_eat;
 	unsigned long	time_eat;
 	unsigned long	time_limit;
-	unsigned int	l_fork;
-	unsigned int	r_fork;
+	int				l_fork;
+	int				r_fork;
 	pthread_mutex_t	mutex;
 	pthread_mutex_t	eat;
 }				t_philo;
 
 typedef struct s_status
 {
-	unsigned int	phil_count;
+	int				phil_count;
 	unsigned long	time_begin;
 	unsigned long	time_to_die;
 	unsigned long	time_to_eat;
 	unsigned long	time_to_sleep;
-	unsigned int	eat_count;
+	int				eat_count;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	is_dead;
