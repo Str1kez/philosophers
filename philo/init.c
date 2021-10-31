@@ -6,7 +6,7 @@
 /*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 20:14:59 by tnessrou          #+#    #+#             */
-/*   Updated: 2021/10/25 20:15:01 by tnessrou         ###   ########.fr       */
+/*   Updated: 2021/10/31 18:35:47 by tnessrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	init_status(t_status *status, int argc, char **argv)
 	status->time_begin = 0;
 	status->philos = NULL;
 	status->forks = NULL;
-	if (status->phil_count < 2 || status->time_to_die < 50
+	if (status->phil_count < 0 || status->time_to_die < 50
 		|| status->time_to_eat < 50 || status->time_to_sleep < 50
 		|| status->eat_count < 0)
 		return (1);

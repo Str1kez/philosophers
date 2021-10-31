@@ -6,7 +6,7 @@
 /*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:27:50 by tnessrou          #+#    #+#             */
-/*   Updated: 2021/10/25 20:09:49 by tnessrou         ###   ########.fr       */
+/*   Updated: 2021/10/31 19:04:06 by tnessrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	*death_check(void *link_v)
 			return (NULL);
 		}
 		pthread_mutex_unlock(&link->philo->mutex);
-		// ? Почему от этого зависит длительность жизни???
 		usleep(1000);
 	}
 }
@@ -67,11 +66,13 @@ static void	*coroutine(void *link_v)
 	while (1)
 	{
 		pthread_mutex_lock(&link->status->forks[link->philo->l_fork]);
+		output(link->philo, link->status, FORK);
 		pthread_mutex_lock(&link->status->forks[link->philo->r_fork]);
+		output(link->philo, link->status, FORK);
 		eat_action(link);
-		pthread_mutex_unlock(&link->status->forks[link->philo->l_fork]);
-		pthread_mutex_unlock(&link->status->forks[link->philo->r_fork]);
 		output(link->philo, link->status, SLEEP);
+		pthread_mutex_unlock(&link->status->forks[link->philo->r_fork]);
+		pthread_mutex_unlock(&link->status->forks[link->philo->l_fork]);
 		usleep(link->status->time_to_sleep * 1000);
 		output(link->philo, link->status, THINK);
 	}

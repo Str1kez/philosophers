@@ -6,18 +6,19 @@
 /*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 21:02:21 by tnessrou          #+#    #+#             */
-/*   Updated: 2021/10/25 19:56:38 by tnessrou         ###   ########.fr       */
+/*   Updated: 2021/10/31 19:16:07 by tnessrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# define DEATH "Philosopher is dead"
-# define SLEEP "Philosopher is sleeping"
-# define EAT "Philosopher is eating"
-# define THINK "Philosopher is thinking"
-# define NOT_EAT "Philosopher doesn't eat anymore"
+# define DEATH "died"
+# define FORK "has taken a fork"
+# define SLEEP "is sleeping"
+# define EAT "is eating"
+# define THINK "is thinking"
+# define NOT_EAT "can't eat anymore"
 
 # include <stdlib.h>
 # include <pthread.h>

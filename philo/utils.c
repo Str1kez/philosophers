@@ -6,14 +6,11 @@
 /*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 21:29:18 by tnessrou          #+#    #+#             */
-/*   Updated: 2021/10/25 19:58:04 by tnessrou         ###   ########.fr       */
+/*   Updated: 2021/10/31 19:02:14 by tnessrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-struct timeval	g_time;
-int				g_isend = 0;
 
 int	ft_isdigit(int c)
 {
@@ -34,19 +31,23 @@ int	my_cmp(char *s1, char *s2)
 
 unsigned long	get_time(void)
 {
-	gettimeofday(&g_time, NULL);
-	return (g_time.tv_sec * 1000 + g_time.tv_usec / 1000);
+	static struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
 void	output(t_philo *philo, t_status *status, char *str)
 {
+	static int	is_end = 0;
+
 	pthread_mutex_lock(&status->output);
-	if (!g_isend)
+	if (!is_end)
 	{
-		printf("Time: %lu\t", get_time() - status->time_begin);
+		printf("%lu ", get_time() - status->time_begin);
 		printf("%u %s\n", philo->pos, str);
 		if (my_cmp(str, DEATH) || my_cmp(str, NOT_EAT))
-			g_isend = 1;
+			is_end = 1;
 	}
 	pthread_mutex_unlock(&status->output);
 }
