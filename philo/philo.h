@@ -42,9 +42,9 @@ typedef struct s_status
 {
 	int				phil_count;
 	unsigned long	time_begin;
-	unsigned long	time_to_die;
-	unsigned long	time_to_eat;
-	unsigned long	time_to_sleep;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
 	int				eat_count;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;

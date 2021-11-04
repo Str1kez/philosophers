@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: strikez <strikez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 20:14:59 by tnessrou          #+#    #+#             */
-/*   Updated: 2021/10/31 21:50:07 by tnessrou         ###   ########.fr       */
+/*   Updated: 2021/11/04 19:22:00 by strikez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ static int	init_forks(t_status *status)
 	return (0);
 }
 
+static void	swap_forks(t_philo *philo)
+{
+	int	swap;
+
+	swap = philo->l_fork;
+	philo->l_fork = philo->r_fork;
+	philo->r_fork = swap;
+}
+
 static int	init_philos(t_status *status)
 {
 	int	i;
@@ -60,6 +69,8 @@ static int	init_philos(t_status *status)
 		status->philos[i].time_limit = 0;
 		status->philos[i].l_fork = i;
 		status->philos[i].r_fork = (i + 1) % status->phil_count;
+		if (i % 2)
+			swap_forks(&status->philos[i]);
 		pthread_mutex_init(&status->philos[i].mutex, NULL);
 		pthread_mutex_init(&status->philos[i].eat, NULL);
 		pthread_mutex_lock(&status->philos[i].eat);
@@ -83,7 +94,7 @@ int	init_status(t_status *status, int argc, char **argv)
 	status->forks = NULL;
 	if (status->phil_count < 1 || status->time_to_die < 50
 		|| status->time_to_eat < 50 || status->time_to_sleep < 50
-		|| status->eat_count < 0)
+		|| (status->eat_count < 0 && argc == 6))
 		return (1);
 	pthread_mutex_init(&status->is_dead, NULL);
 	pthread_mutex_init(&status->output, NULL);

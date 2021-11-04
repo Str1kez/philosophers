@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: strikez <strikez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:27:50 by tnessrou          #+#    #+#             */
-/*   Updated: 2021/10/31 19:04:06 by tnessrou         ###   ########.fr       */
+/*   Updated: 2021/11/04 19:24:15 by strikez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	threads(t_status *status, t_link *link)
 	if (init_link(&link, status))
 		return (1);
 	status->time_begin = get_time();
-	if (status->eat_count > 0)
+	if (status->eat_count > -1)
 	{
 		if (pthread_create(&thread, NULL, eat_count_check, (void *)link))
 			return (1);
