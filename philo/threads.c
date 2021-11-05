@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: strikez <strikez@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:27:50 by tnessrou          #+#    #+#             */
-/*   Updated: 2021/11/04 19:24:15 by strikez          ###   ########.fr       */
+/*   Updated: 2021/11/05 21:05:29 by tnessrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ static void	*coroutine(void *link_v)
 	pthread_t	thread;
 
 	link = (t_link *)(link_v);
-	link->philo->time_eat = get_time();
-	link->philo->time_limit = link->philo->time_eat + link->status->time_to_die;
+	link->philo->time_limit = get_time() + link->status->time_to_die;
 	if (pthread_create(&thread, NULL, death_check, link_v))
 		return (NULL);
 	pthread_detach(thread);
@@ -98,6 +97,7 @@ int	threads(t_status *status, t_link *link)
 		if (pthread_create(&thread, NULL, coroutine, (void *)(link + i)))
 			return (1);
 		pthread_detach(thread);
+		usleep(100);
 		i++;
 	}
 	return (0);

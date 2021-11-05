@@ -6,7 +6,7 @@
 /*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 21:02:21 by tnessrou          #+#    #+#             */
-/*   Updated: 2021/10/31 19:16:07 by tnessrou         ###   ########.fr       */
+/*   Updated: 2021/11/05 20:44:46 by tnessrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_philo
 {
 	int				pos;
 	int				is_eat;
-	unsigned long	time_eat;
 	unsigned long	time_limit;
 	int				l_fork;
 	int				r_fork;
