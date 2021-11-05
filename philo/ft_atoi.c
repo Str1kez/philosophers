@@ -6,7 +6,7 @@
 /*   By: tnessrou <tnessrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 20:14:52 by tnessrou          #+#    #+#             */
-/*   Updated: 2021/10/31 21:47:16 by tnessrou         ###   ########.fr       */
+/*   Updated: 2021/11/05 17:38:22 by tnessrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	ft_atoi(const char *str)
 		}
 		str++;
 	}
+	if (sign == -1)
+		return (-1);
 	return (result * sign);
 }
 
